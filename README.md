@@ -10,7 +10,6 @@ Using this currently is extremely dangerous!
 1. Follow https://create-react-app.dev/docs/using-https-in-development for your os
 2. Run `npm start`
 
-
 ## How to build
 
 Run `npm run build`.
@@ -20,3 +19,8 @@ Run `npm run build`.
 Something like this (room_id and https are required)
 
 `/addwidget https://localhost:3000?room_id=$matrix_room_id`
+
+## Hosted instance
+
+A hosted widget is at https://moderation_widget.nordgedanken.dev/ you can add it via
+`/addwidget https://moderation_widget.nordgedanken.dev?room_id=$matrix_room_id`
