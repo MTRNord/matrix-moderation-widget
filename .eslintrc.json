@@ -1,0 +1,27 @@
+{
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/filename-case": "off",
+    "unicorn/prefer-ternary": "off",
+    "unicorn/no-lonely-if": "off",
+    "unicorn/empty-brace-spaces": "off",
+    "unicorn/prefer-node-protocol": "off",
+    "unicorn/import-style": [
+      "error",
+      {
+        "checkDynamicImport": false
+      }
+    ]
+  }
+}

@@ -1,15 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { WidgetApi } from 'matrix-widget-api';
+import {
+  M_POLICY_RULE_SERVER,
+  M_POLICY_RULE_SERVER_ALT,
+  M_POLICY_RULE_SERVER_OLD,
+  M_POLICY_RULE_USER,
+  M_POLICY_RULE_USER_ALT,
+  M_POLICY_RULE_USER_OLD
+} from './windowExt';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const urlParams = (new URL(window.location.href)).searchParams;
+const widgetId = urlParams.get("widgetId") ?? undefined;
+window.widget_api = new WidgetApi(widgetId);
+window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_USER);
+window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_SERVER);
+window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_USER_OLD);
+window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_SERVER_OLD);
+window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_USER_ALT);
+window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_SERVER_ALT);
+window.widget_api.requestCapabilityToSendMessage("m.text");
+window.widget_api.requestCapabilityToReceiveState("m.room.member");
+// TODO maybe figure out the proper way later
+window.widget_api.requestCapabilityForRoomTimeline("*");
+
+window.widget_api.on(`ready`, () => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.querySelector('#root')
+  );
+});
+
+// Start the messaging
+window.widget_api.start();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
