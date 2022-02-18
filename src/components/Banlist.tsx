@@ -1,5 +1,15 @@
 import { PureComponent } from 'react';
-import { MembershipEvent, M_POLICY_RULE_SERVER, M_POLICY_RULE_SERVER_ALT, M_POLICY_RULE_SERVER_OLD, M_POLICY_RULE_USER, M_POLICY_RULE_USER_ALT, M_POLICY_RULE_USER_OLD, ServerRuleEvent, UserRuleEvent } from '../windowExt';
+import {
+    MembershipEvent,
+    M_POLICY_RULE_SERVER,
+    M_POLICY_RULE_SERVER_ALT,
+    M_POLICY_RULE_SERVER_OLD,
+    M_POLICY_RULE_USER,
+    M_POLICY_RULE_USER_ALT, 
+    M_POLICY_RULE_USER_OLD, 
+    ServerRuleEvent, 
+    UserRuleEvent
+} from '../windowExt';
 
 type Props = Record<string, unknown>;
 type State = {
@@ -55,12 +65,12 @@ class BanList extends PureComponent<Props, State> {
         const filtered_user_rules = filter ? user_rules.filter(element => element.content && Object.keys(element.content).length > 0 && element.content?.entity.includes(filter)) : user_rules;
         const filtered_server_rules = filter ? server_rules.filter(element => element.content && Object.keys(element.content).length > 0 && element.content?.entity.includes(filter)) : server_rules;
         return (
-            <main className="m-4 flex items-center flex-col justify-center">
-                <div className='flex flex-row justify-between content-between w-full px-12'>
+            <main className="m-8 flex items-center flex-col justify-center">
+                <div className='flex flex-row justify-between content-between w-full'>
                     <h1 className="text-3xl font-bold underline text-gray-900 dark:text-gray-200 mb-4">Banlist data</h1>
                     <input onChange={this.onSearch.bind(this)} value={filter} placeholder="Search for user or server" className='py-1.5 px-2 rounded border-none placeholder:text-gray-900 text-gray-9000'></input>
                 </div>
-                <div className='flex flex-row px-12'>
+                <div className='flex flex-row justify-between content-between w-full'>
                     <section className='mr-2'>
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-2">User Bans ({user_rules.length})</h3>
                         <table className='table-auto border-collapse border-2 border-slate-500 text-gray-900 dark:text-gray-200 text-base font-normal break-words'>

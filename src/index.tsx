@@ -5,12 +5,14 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { WidgetApi } from 'matrix-widget-api';
 import {
+  CANONICAL_ALIAS,
   M_POLICY_RULE_SERVER,
   M_POLICY_RULE_SERVER_ALT,
   M_POLICY_RULE_SERVER_OLD,
   M_POLICY_RULE_USER,
   M_POLICY_RULE_USER_ALT,
-  M_POLICY_RULE_USER_OLD
+  M_POLICY_RULE_USER_OLD,
+  ORG_MATRIX_MJOLNIR_SHORTCODE,
 } from './windowExt';
 
 const urlParams = (new URL(window.location.href)).searchParams;
@@ -22,6 +24,8 @@ window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_USER_OLD);
 window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_SERVER_OLD);
 window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_USER_ALT);
 window.widget_api.requestCapabilityToReceiveState(M_POLICY_RULE_SERVER_ALT);
+window.widget_api.requestCapabilityToReceiveState(CANONICAL_ALIAS);
+window.widget_api.requestCapabilityToReceiveState(ORG_MATRIX_MJOLNIR_SHORTCODE);
 window.widget_api.requestCapabilityToSendMessage("m.text");
 window.widget_api.requestCapabilityToReceiveState("m.room.member");
 // TODO maybe figure out the proper way later
