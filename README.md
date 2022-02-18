@@ -5,7 +5,17 @@ This is an experimental widget to be used in the Mjolnir moderation room.
 Use at your own risk! If you break your bot and it is not an bug your issue will be closed.
 Using this currently is extremely dangerous!
 
-## How toa dd
+## How to start in dev mode
+
+1. Follow https://create-react-app.dev/docs/using-https-in-development for your os
+2. Run `npm start`
+
+
+## How to build
+
+Run `npm run build`.
+
+## How to add
 
 Something like this (room_id and https are required)
 
