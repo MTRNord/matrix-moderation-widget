@@ -5,6 +5,9 @@ This is an experimental widget to be used in the Mjolnir moderation room.
 Use at your own risk! If you break your bot and it is not an bug your issue will be closed.
 Using this currently is extremely dangerous!
 
+## Screenshots
+![Screenshot](images/screenshot.png)
+
 ## How to start in dev mode
 
 1. Follow https://create-react-app.dev/docs/using-https-in-development for your os
