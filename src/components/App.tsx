@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import BanList from './Banlist';
+import BanList from './forms/Banlist';
 import Home from './Home';
 
 type Pages = "banlist" | "home";
@@ -41,7 +41,7 @@ class App extends PureComponent<Props, State> {
             </nav>
           </div>
         </header>
-        <div className='lg:pt-20 pt-52 z-0'>
+        <div className='lg:pt-20 pt-52 z-0 max-h-full'>
           {
             current_page === "home" ? <Home /> : (current_page === "banlist" ? <BanList /> : <Home />)
           }

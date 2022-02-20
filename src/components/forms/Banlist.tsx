@@ -9,7 +9,7 @@ import {
     M_POLICY_RULE_USER_OLD, 
     ServerRuleEvent, 
     UserRuleEvent
-} from '../windowExt';
+} from '../../windowExt';
 
 type Props = Record<string, unknown>;
 type State = {
