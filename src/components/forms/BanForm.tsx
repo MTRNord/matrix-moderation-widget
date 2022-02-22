@@ -12,7 +12,7 @@ import {
     ServerRuleEvent,
     ShortcodeEvent,
     UserRuleEvent
-} from "../windowExt";
+} from "../../windowExt";
 
 type Props = Record<string, unknown>;
 type State = {
@@ -20,8 +20,8 @@ type State = {
     reason: string;
     roomId?: string;
     aliases_shortcodes: Map<string, string>;
-    banlist?: string;
-    bantype?: "user" | "server";
+    banlist: string;
+    bantype: "user" | "server" | "";
 };
 
 class BanForm extends PureComponent<Props, State> {
@@ -33,6 +33,8 @@ class BanForm extends PureComponent<Props, State> {
             glob: "",
             reason: "",
             roomId: roomId,
+            banlist: "",
+            bantype: "",
             aliases_shortcodes: new Map()
         };
     }
@@ -73,10 +75,25 @@ class BanForm extends PureComponent<Props, State> {
 
     async handleSubmit(ev: { preventDefault: () => void; }) {
         ev.preventDefault();
-        await window.widget_api.sendRoomEvent("m.room.message", {
-            msgtype: "m.text",
-            body: `!mjolnir ban ${this.state.banlist} ${this.state.bantype} ${this.state.glob} ${this.state.reason}`,
-        }, this.state.roomId);
+
+        const { glob, banlist, bantype, reason, roomId } = this.state;
+
+        if (glob === "" || banlist === "" || bantype === "") {
+            // TODO display warning
+            return;
+        } else {
+            if (reason === "") {
+                await window.widget_api.sendRoomEvent("m.room.message", {
+                    msgtype: "m.text",
+                    body: `!mjolnir ban ${banlist} ${bantype} ${glob}`,
+                }, roomId);
+            } else {
+                await window.widget_api.sendRoomEvent("m.room.message", {
+                    msgtype: "m.text",
+                    body: `!mjolnir ban ${banlist} ${bantype} ${glob} ${reason}`,
+                }, roomId);
+            }
+        }
     }
 
     render() {
@@ -86,10 +103,10 @@ class BanForm extends PureComponent<Props, State> {
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-2">Ban</h3>
                 <form onSubmit={this.handleSubmit.bind(this)} className="grid grid-cols-1 gap-4">
                     <label className="inner-flex flex-col">
-                        <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Bantype</span>
+                        <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Banlist</span>
                         <h4 className="text-gray-900 dark:text-gray-200 text-base font-thin mb-2 w-96 italic">(Warning: This doesn't check if the banlist can be written to or the bot if watches it)</h4>
                         <div className="w-96">
-                            <select required name="banlist" value={banlist ?? ""} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
+                            <select required name="banlist" value={banlist} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
                                 <option value="" disabled>Select an Banlist</option>
                                 {
                                     [...aliases_shortcodes].map(([alias, shortcode]) => {
@@ -102,7 +119,7 @@ class BanForm extends PureComponent<Props, State> {
                     <label className="inner-flex flex-col w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Bantype</span>
                         <div className="w-96">
-                            <select defaultValue="" required name="bantype" value={bantype ?? ""} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
+                            <select required defaultValue="" name="bantype" value={bantype} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
                                 <option value="" disabled>Select an Bantype</option>
                                 <option value="user">User</option>
                                 <option value="server">Server</option>
@@ -112,7 +129,7 @@ class BanForm extends PureComponent<Props, State> {
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Glob</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input placeholder="Glob" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="glob" value={glob} onChange={this.handleInputChange.bind(this)} />
+                            <input required placeholder="Glob" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="glob" value={glob} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <label className="block w-96">

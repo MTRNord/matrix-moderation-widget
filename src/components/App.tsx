@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import BanList from './forms/Banlist';
+import BanList from './Banlist';
 import Home from './Home';
 
 type Pages = "banlist" | "home";

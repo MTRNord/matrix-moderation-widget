@@ -1,5 +1,5 @@
 import { PureComponent } from 'react';
-import BanForm from './BanForm';
+import BanForm from './forms/BanForm';
 import RedactForm from './forms/RedactForm';
 
 type Props = Record<string, unknown>;
