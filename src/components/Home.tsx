@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import BanForm from './forms/BanForm';
+import KickForm from './forms/KickForm';
 import RedactForm from './forms/RedactForm';
 
 type Props = Record<string, unknown>;
@@ -15,6 +16,9 @@ class Home extends PureComponent<Props, State> {
                     <div className='flex flex-row flex-wrap'>
                         <section className='mr-16 mb-16'>
                             <BanForm />
+                        </section>
+                        <section className='mr-16 mb-16'>
+                            <KickForm />
                         </section>
                         <section>
                             <RedactForm />
