@@ -89,7 +89,7 @@ class BanList extends PureComponent<Props, State> {
                     <input onChange={this.onSearch.bind(this)} value={filter} placeholder="Search for user or server" className='py-1.5 px-2 rounded border-none placeholder:text-gray-900 text-gray-9000'></input>
                 </div>
                 <div className='flex flex-row justify-between content-between w-full'>
-                    <section className='mr-2'>
+                    <section className='mr-2 w-full'>
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-2">User Bans ({user_rules.length})</h3>
                         <table className='table-auto border-collapse border-2 border-slate-500 text-gray-900 dark:text-gray-200 text-base font-normal break-words w-full'>
                             <thead>
@@ -127,7 +127,7 @@ class BanList extends PureComponent<Props, State> {
                             </tbody>
                         </table>
                     </section>
-                    <section>
+                    <section className="w-full">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-2">Server Bans ({server_rules.length})</h3>
                         <table className='table-auto border-collapse border-2 border-slate-500 text-gray-900 dark:text-gray-200 text-base font-normal break-words w-full'>
                             <thead>
