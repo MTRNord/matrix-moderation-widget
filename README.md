@@ -29,3 +29,29 @@ Something like this (room_id and https are required)
 
 A hosted widget is at https://moderation_widget.nordgedanken.dev/ you can add it via
 `/addwidget https://moderation_widget.nordgedanken.dev?room_id=$matrix_room_id`
+
+## Adcanced
+
+### Use a state event to allow showing relevant Lists only in the dropdown
+
+TODO:
+
+1. Allow the bot to send the state event. For this you need to make the bot PL 1
+and allow sending `dev.nordgedanken.mjolnir_banlists` for PL1 users.
+2. Send the following state event as the bot:
+
+You can use `/devtools` in element-web to send a custom state event.
+
+Event Type: `dev.nordgedanken.mjolnir_banlists`
+State Key: The user id of the bot
+Content: 
+
+```
+{
+  "banlists": {
+    "#matrix-org-coc-bl:matrix.org": "COC"
+  }
+}
+```
+
+Edit it to fit your banlists.

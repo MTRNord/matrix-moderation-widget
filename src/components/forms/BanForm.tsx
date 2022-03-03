@@ -2,6 +2,8 @@ import { PureComponent } from "react";
 import {
     CanonicalAliasEvent,
     CANONICAL_ALIAS,
+    DEV_NORDGEDANKEN_MJOLNIR_BANLISTS,
+    MJjolnirBanlists,
     M_POLICY_RULE_SERVER,
     M_POLICY_RULE_SERVER_ALT,
     M_POLICY_RULE_SERVER_OLD,
@@ -46,6 +48,7 @@ class BanForm extends PureComponent<Props, State> {
         const server_rules_old = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_OLD, 250_000_000_000, undefined, ["*"]) as ServerRuleEvent[];
         const user_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_USER_ALT, 250_000_000_000, undefined, ["*"]) as UserRuleEvent[];
         const server_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_ALT, 250_000_000_000, undefined, ["*"]) as ServerRuleEvent[];
+        const banlist_codes = await window.widget_api.readStateEvents(DEV_NORDGEDANKEN_MJOLNIR_BANLISTS, 250_000_000_000, undefined, [this.state.roomId ?? "*"]) as MJjolnirBanlists[];
         const user_rules_all = [...user_rules, ...user_rules_old, ...user_rules_alt];
         const server_rules_all = [...server_rules, ...server_rules_old, ...server_rules_alt];
         const listrooms = [...new Set([...user_rules_all.map(element => element.room_id), ...server_rules_all.map(element => element.room_id)])];
@@ -54,8 +57,18 @@ class BanForm extends PureComponent<Props, State> {
         const aliases_shortcodes = new Map();
 
         for (const event of aliases) {
-            if (event.content?.alias) {
+            let result_known = true;
+            if (banlist_codes.length > 0) {
+                if (banlist_codes.some(known_lists_event => known_lists_event.content?.banlists.keys.includes(event.room_id) || known_lists_event.content?.banlists.keys.includes(event.content?.alias ?? ""))) {
+                    result_known = true;
+                } else {
+                    result_known = false;
+                }
+            }
+            if (event.content?.alias && result_known) {
                 aliases_shortcodes.set(event.content?.alias, shortcodes.find(shortcode_event => shortcode_event.room_id === event.room_id)?.content?.shortcode);
+            } else if (result_known) {
+                aliases_shortcodes.set(event.room_id, shortcodes.find(shortcode_event => shortcode_event.room_id === event.room_id)?.content?.shortcode);
             }
         }
 
