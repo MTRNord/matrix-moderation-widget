@@ -56,17 +56,14 @@ class BanList extends PureComponent<Props, State> {
         this.setState({
             user_rules: user_rules_all.filter(rules => {
                 if (banlist_codes.length > 0) {
-                    return banlist_codes.some(banlist_codes_event => {
-                        console.log("type:", typeof banlist_codes_event.content?.banlists);
-                        return banlist_codes_event.content?.banlists.has(aliases.find(aliases_event => aliases_event.room_id === rules.room_id)?.content?.alias ?? "") || banlist_codes_event.content?.banlists.has(rules.room_id);
-                    });
+                    return banlist_codes.some(banlist_codes_event => ((aliases.find(aliases_event => aliases_event.room_id === rules.room_id)?.content?.alias ?? "") in (banlist_codes_event.content?.banlists ?? {})) || (rules.room_id in (banlist_codes_event.content?.banlists ?? {})));
                 } else {
                     return true;
                 }
             }),
             server_rules: server_rules_all.filter(rules => {
                 if (banlist_codes.length > 0) {
-                    return banlist_codes.some(banlist_codes_event => banlist_codes_event.content?.banlists.has(aliases.find(aliases_event => aliases_event.room_id === rules.room_id)?.content?.alias ?? "") || banlist_codes_event.content?.banlists.has(rules.room_id));
+                    return banlist_codes.some(banlist_codes_event => ((aliases.find(aliases_event => aliases_event.room_id === rules.room_id)?.content?.alias ?? "") in (banlist_codes_event.content?.banlists ?? {})) || (rules.room_id in (banlist_codes_event.content?.banlists ?? {})));
                 } else {
                     return true;
                 }
