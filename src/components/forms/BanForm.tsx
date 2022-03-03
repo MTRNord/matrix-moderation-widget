@@ -49,6 +49,7 @@ class BanForm extends PureComponent<Props, State> {
         const user_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_USER_ALT, 250_000_000_000, undefined, ["*"]) as UserRuleEvent[];
         const server_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_ALT, 250_000_000_000, undefined, ["*"]) as ServerRuleEvent[];
         const banlist_codes = await window.widget_api.readStateEvents(DEV_NORDGEDANKEN_MJOLNIR_BANLISTS, 250_000_000_000, undefined, [this.state.roomId ?? "*"]) as MJjolnirBanlists[];
+        console.log("banlist_codes:", banlist_codes);
         const user_rules_all = [...user_rules, ...user_rules_old, ...user_rules_alt];
         const server_rules_all = [...server_rules, ...server_rules_old, ...server_rules_alt];
         const listrooms = [...new Set([...user_rules_all.map(element => element.room_id), ...server_rules_all.map(element => element.room_id)])];
