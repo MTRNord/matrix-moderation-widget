@@ -73,10 +73,14 @@ class BanForm extends PureComponent<Props, State> {
         }
 
         if (banlist_codes.length > 0) {
+            console.log("extras");
             const lists_event = banlist_codes.find(list => list.room_id === this.state.roomId);
-            for (const list of lists_event?.content?.banlists?.keys ?? []) {
+            console.log("lists_event:", lists_event);
+            for (const [list, shortcode] of Object.entries(lists_event?.content?.banlists ?? {})) {
+                console.log("list:", list);
+                console.log("shortcode:", shortcode);
                 if (!aliases_shortcodes.has(list)) {
-                    aliases_shortcodes.set(list, lists_event?.content?.banlists[list]);
+                    aliases_shortcodes.set(list, shortcode);
                 }
             }
         }
