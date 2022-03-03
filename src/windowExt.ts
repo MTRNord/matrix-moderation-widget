@@ -80,6 +80,6 @@ export type MJjolnirBanlists = {
     event_id: string;
     room_id: string;
     content?: {
-        banlists: Record<string, string>;
+        banlists: Map<string, string>;
     };
 };

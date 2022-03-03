@@ -59,7 +59,7 @@ class BanForm extends PureComponent<Props, State> {
         for (const event of aliases) {
             let result_known = true;
             if (banlist_codes.length > 0) {
-                if (banlist_codes.some(known_lists_event => known_lists_event.content?.banlists.keys.includes(event.room_id) || known_lists_event.content?.banlists.keys.includes(event.content?.alias ?? ""))) {
+                if (banlist_codes.some(known_lists_event => known_lists_event.content?.banlists.has(event.room_id) || known_lists_event.content?.banlists.has(event.content?.alias ?? ""))) {
                     result_known = true;
                 } else {
                     result_known = false;

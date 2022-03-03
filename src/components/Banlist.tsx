@@ -1,13 +1,17 @@
 import { PureComponent } from 'react';
 import {
+    CanonicalAliasEvent,
+    CANONICAL_ALIAS,
+    DEV_NORDGEDANKEN_MJOLNIR_BANLISTS,
     MembershipEvent,
+    MJjolnirBanlists,
     M_POLICY_RULE_SERVER,
     M_POLICY_RULE_SERVER_ALT,
     M_POLICY_RULE_SERVER_OLD,
     M_POLICY_RULE_USER,
-    M_POLICY_RULE_USER_ALT, 
-    M_POLICY_RULE_USER_OLD, 
-    ServerRuleEvent, 
+    M_POLICY_RULE_USER_ALT,
+    M_POLICY_RULE_USER_OLD,
+    ServerRuleEvent,
     UserRuleEvent
 } from '../windowExt';
 
@@ -46,10 +50,24 @@ class BanList extends PureComponent<Props, State> {
         const sender = new Set([...user_rules_all.map(element => element.sender), ...server_rules_all.map(element => element.sender)]);
         const memberships = await window.widget_api.readStateEvents("m.room.member", 250_000_000_000, undefined, list_rooms) as MembershipEvent[];
         const memberships_needed = memberships.filter(member => sender.has(member.state_key));
+        const banlist_codes = await window.widget_api.readStateEvents(DEV_NORDGEDANKEN_MJOLNIR_BANLISTS, 250_000_000_000, undefined, [this.state.roomId ?? "*"]) as MJjolnirBanlists[];
+        const aliases = await window.widget_api.readStateEvents(CANONICAL_ALIAS, list_rooms.length, undefined, list_rooms) as CanonicalAliasEvent[];
 
         this.setState({
-            user_rules: user_rules_all,
-            server_rules: server_rules_all,
+            user_rules: user_rules_all.filter(rules => {
+                if (banlist_codes.length > 0) {
+                    return banlist_codes.some(banlist_codes_event => banlist_codes_event.content?.banlists.has(aliases.find(aliases_event => aliases_event.room_id === rules.room_id)?.content?.alias ?? "") || banlist_codes_event.content?.banlists.has(rules.room_id));
+                } else {
+                    return true;
+                }
+            }),
+            server_rules: server_rules_all.filter(rules => {
+                if (banlist_codes.length > 0) {
+                    return banlist_codes.some(banlist_codes_event => banlist_codes_event.content?.banlists.has(aliases.find(aliases_event => aliases_event.room_id === rules.room_id)?.content?.alias ?? "") || banlist_codes_event.content?.banlists.has(rules.room_id));
+                } else {
+                    return true;
+                }
+            }),
             memberships: memberships_needed
         });
     }
