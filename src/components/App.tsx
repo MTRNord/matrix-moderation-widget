@@ -1,7 +1,7 @@
-import { PureComponent } from 'react';
-import BanList from './Banlist';
-import Home from './Home';
-import NewRoom from './NewRoom';
+import React, { PureComponent, Suspense } from 'react';
+const BanList = React.lazy(() => import('./Banlist'));
+const Home = React.lazy(() => import('./Home'));
+const NewRoom = React.lazy(() => import('./NewRoom'));
 
 type Pages = "banlist" | "home" | "new_room";
 
@@ -39,13 +39,25 @@ class App extends PureComponent<Props, State> {
   getPage(page: Pages) {
     switch (page) {
       case "home": {
-        return <Home />;
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home />
+          </Suspense>
+        );
       }
       case "banlist": {
-        return <BanList />;
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <BanList />
+          </Suspense>
+        );
       }
       case "new_room": {
-        return <NewRoom />;
+        return (
+          <Suspense fallback={<div>Loading...</div>}>
+            <NewRoom />
+          </Suspense>
+        );
       }
     }
   }
