@@ -98,6 +98,7 @@ class BanList extends PureComponent<Props, State> {
                                     <th className='border-2 border-slate-600 p-1'>Recommendation</th>
                                     <th className='border-2 border-slate-600 p-1'>Reason</th>
                                     <th className='border-2 border-slate-600 p-1'>Sender</th>
+                                    <th className='border-2 border-slate-600 p-1'>Room</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,6 +116,7 @@ class BanList extends PureComponent<Props, State> {
                                                         <td className='p-1 min-w-[1rem] max-w-[14rem]'>{recommendation}</td>
                                                         <td className='p-1 min-w-[8rem] max-w-[14rem]'>{element.content.reason}</td>
                                                         <td className='p-1 min-w-[12rem] max-w-[14rem]'>{sender_dp}</td>
+                                                        <td className='p-1 min-w-[12rem] max-w-[14rem]'>{element.room_id}</td>
                                                     </tr>
                                                 );
                                             }
@@ -136,6 +138,7 @@ class BanList extends PureComponent<Props, State> {
                                     <th className='border-2 border-slate-600 p-2'>Recommendation</th>
                                     <th className='border-2 border-slate-600 p-2'>Reason</th>
                                     <th className='border-2 border-slate-600 p-1'>Sender</th>
+                                    <th className='border-2 border-slate-600 p-1'>Room</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -153,6 +156,7 @@ class BanList extends PureComponent<Props, State> {
                                                         <td className='p-1 min-w-[1rem] max-w-[14rem]'>{recommendation}</td>
                                                         <td className='p-1 min-w-[8rem] max-w-[14rem]'>{element.content.reason}</td>
                                                         <td className='p-1 min-w-[12rem] max-w-[14rem]'>{sender_dp}</td>
+                                                        <td className='p-1 min-w-[12rem] max-w-[14rem]'>{element.room_id}</td>
                                                     </tr>
                                                 );
                                             }
