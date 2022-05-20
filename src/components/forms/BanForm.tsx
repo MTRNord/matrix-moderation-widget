@@ -126,7 +126,7 @@ class BanForm extends PureComponent<Props, State> {
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Banlist</span>
                         <h4 className="text-gray-900 dark:text-gray-200 text-base font-thin mb-2 w-96 italic">(Warning: This doesn't check if the banlist can be written to or the bot if watches it)</h4>
                         <div className="w-96">
-                            <select required name="banlist" value={banlist} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
+                            <select aria-label="Banlist" aria-required="true" required name="banlist" value={banlist} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
                                 <option value="" disabled>Select an Banlist</option>
                                 {
                                     [...aliases_shortcodes].map(([alias, shortcode]) => {
@@ -139,7 +139,7 @@ class BanForm extends PureComponent<Props, State> {
                     <label className="inner-flex flex-col w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Bantype</span>
                         <div className="w-96">
-                            <select required defaultValue="" name="bantype" value={bantype} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
+                            <select aria-label="Bantype" aria-required="true" required defaultValue="" name="bantype" value={bantype} className="max-w-full min-w-full placeholder:text-gray-900 text-gray-900 rounded py-1.5 px-2" onChange={this.handleInputChange.bind(this)}>
                                 <option value="" disabled>Select an Bantype</option>
                                 <option value="user">User</option>
                                 <option value="server">Server</option>
@@ -150,13 +150,13 @@ class BanForm extends PureComponent<Props, State> {
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Glob</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input required placeholder="Glob" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="glob" value={glob} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Glob" aria-required="true" required placeholder="Glob" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="glob" value={glob} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Reason</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input placeholder="Reason" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="reason" value={reason} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Reason" aria-required="false" placeholder="Reason" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="reason" value={reason} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
 

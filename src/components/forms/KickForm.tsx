@@ -67,19 +67,19 @@ class KickForm extends PureComponent<Props, State> {
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">User ID</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input required placeholder="User ID" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="user" value={user} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="User identifier" aria-required="true" required placeholder="User ID" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="user" value={user} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Room Alias/ID</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input placeholder="Room Alias/ID" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="room" value={room} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Room Alias or Room identifier" aria-required="false" placeholder="Room Alias/ID" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="room" value={room} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Reason</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input placeholder="Reason" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="reason" value={reason} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Reason" aria-required="false" placeholder="Reason" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="reason" value={reason} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
 

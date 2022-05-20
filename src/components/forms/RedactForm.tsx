@@ -64,26 +64,26 @@ class RedactForm extends PureComponent<Props, State> {
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">User ID (required if Event Permalink empty)</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input disabled={event !== ""} required={event === ""} placeholder="User ID (required if Permalink empty)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="user" value={user} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="User identifier (required if Event Permalink empty)" aria-disabled={event !== ""} aria-required={event === ""} disabled={event !== ""} required={event === ""} placeholder="User ID (required if Permalink empty)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="user" value={user} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Room (optional)</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input disabled={event !== ""} placeholder="Room (optional)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="room" value={room} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Room" aria-disabled={event !== ""} aria-required="false" disabled={event !== ""} placeholder="Room (optional)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="room" value={room} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Limit (optional)</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input disabled={event !== ""} placeholder="Limit (optional)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="limit" value={limit} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Limit" aria-disabled={event !== ""} aria-required="false" disabled={event !== ""} placeholder="Limit (optional)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="limit" value={limit} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
                     <h4 className="text-gray-900 dark:text-gray-200 text-lg font-normal mb-1 w-96">Redacting an event</h4>
                     <label className="block w-96">
                         <span className="text-gray-900 dark:text-gray-200 visually-hidden mb-2">Event Permalink (required if User ID empty)</span>
                         <div className="mt-1 w-full flex flex-row box-border items-center cursor-text duration-300 max-w-full">
-                            <input disabled={user !== ""} required={user === ""} placeholder="Event Permalink (required if User ID empty)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="event" value={event} onChange={this.handleInputChange.bind(this)} />
+                            <input aria-label="Limit" aria-disabled={user !== ""} aria-required={user === ""} disabled={user !== ""} required={user === ""} placeholder="Event Permalink (required if User ID empty)" className="rounded py-1.5 px-2 min-w-[1.25rem] flex-[1] border-none placeholder:text-gray-900 text-gray-900" type="text" name="event" value={event} onChange={this.handleInputChange.bind(this)} />
                         </div>
                     </label>
 
