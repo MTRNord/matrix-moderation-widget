@@ -23,7 +23,7 @@ type State = {
     roomId?: string;
     aliases_shortcodes: Map<string, string>;
     banlist: string;
-    bantype: "user" | "server" | "";
+    bantype: "user" | "server" | "room" | "";
 };
 
 class BanForm extends PureComponent<Props, State> {
@@ -144,6 +144,7 @@ class BanForm extends PureComponent<Props, State> {
                                 <option value="" disabled>Select an Bantype</option>
                                 <option value="user">User</option>
                                 <option value="server">Server</option>
+                                <option value="room">Room</option>
                             </select>
                         </div>
                     </label>
