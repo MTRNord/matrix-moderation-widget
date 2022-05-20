@@ -11,9 +11,8 @@ import {
     M_POLICY_RULE_USER_ALT,
     M_POLICY_RULE_USER_OLD,
     ORG_MATRIX_MJOLNIR_SHORTCODE,
-    ServerRuleEvent,
+    RuleEvent,
     ShortcodeEvent,
-    UserRuleEvent
 } from "../../windowExt";
 
 type Props = Record<string, unknown>;
@@ -42,12 +41,12 @@ class BanForm extends PureComponent<Props, State> {
     }
 
     async componentDidMount() {
-        const user_rules = await window.widget_api.readStateEvents(M_POLICY_RULE_USER, 250_000_000_000, undefined, ["*"]) as UserRuleEvent[];
-        const server_rules = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER, 250_000_000_000, undefined, ["*"]) as ServerRuleEvent[];
-        const user_rules_old = await window.widget_api.readStateEvents(M_POLICY_RULE_USER_OLD, 250_000_000_000, undefined, ["*"]) as UserRuleEvent[];
-        const server_rules_old = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_OLD, 250_000_000_000, undefined, ["*"]) as ServerRuleEvent[];
-        const user_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_USER_ALT, 250_000_000_000, undefined, ["*"]) as UserRuleEvent[];
-        const server_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_ALT, 250_000_000_000, undefined, ["*"]) as ServerRuleEvent[];
+        const user_rules = await window.widget_api.readStateEvents(M_POLICY_RULE_USER, 250_000_000_000, undefined, ["*"]) as RuleEvent[];
+        const server_rules = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER, 250_000_000_000, undefined, ["*"]) as RuleEvent[];
+        const user_rules_old = await window.widget_api.readStateEvents(M_POLICY_RULE_USER_OLD, 250_000_000_000, undefined, ["*"]) as RuleEvent[];
+        const server_rules_old = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_OLD, 250_000_000_000, undefined, ["*"]) as RuleEvent[];
+        const user_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_USER_ALT, 250_000_000_000, undefined, ["*"]) as RuleEvent[];
+        const server_rules_alt = await window.widget_api.readStateEvents(M_POLICY_RULE_SERVER_ALT, 250_000_000_000, undefined, ["*"]) as RuleEvent[];
         const banlist_codes = await window.widget_api.readStateEvents(DEV_NORDGEDANKEN_MJOLNIR_BANLISTS, 250_000_000_000, undefined, [this.state.roomId ?? "*"]) as MJjolnirBanlists[];
         const user_rules_all = [...user_rules, ...user_rules_old, ...user_rules_alt];
         const server_rules_all = [...server_rules, ...server_rules_old, ...server_rules_alt];
